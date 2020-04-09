@@ -1,0 +1,9 @@
+C:\Users\ncowley\source\repos\TestProcListener\TestProcListener\bin\Debug\TestProcListener.exe.config
+C:\Users\ncowley\source\repos\TestProcListener\TestProcListener\bin\Debug\TestProcListener.exe
+C:\Users\ncowley\source\repos\TestProcListener\TestProcListener\bin\Debug\TestProcListener.pdb
+C:\Users\ncowley\source\repos\TestProcListener\TestProcListener\obj\Debug\TestProcListener.csprojAssemblyReference.cache
+C:\Users\ncowley\source\repos\TestProcListener\TestProcListener\obj\Debug\TestProcListener.Properties.Resources.resources
+C:\Users\ncowley\source\repos\TestProcListener\TestProcListener\obj\Debug\TestProcListener.csproj.GenerateResource.cache
+C:\Users\ncowley\source\repos\TestProcListener\TestProcListener\obj\Debug\TestProcListener.exe
+C:\Users\ncowley\source\repos\TestProcListener\TestProcListener\obj\Debug\TestProcListener.pdb
+C:\Users\ncowley\source\repos\TestProcListener\TestProcListener\obj\Debug\TestProcListener.MainWindow.resources
