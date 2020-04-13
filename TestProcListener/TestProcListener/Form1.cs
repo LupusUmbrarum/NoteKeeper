@@ -12,14 +12,14 @@ using System.Diagnostics;
 
 namespace TestProcListener
 {
-	public partial class Form1 : Form
+	public partial class MainWindow : Form
 	{
 		ManagementEventWatcher processStartEvent = new ManagementEventWatcher("SELECT * FROM Win32_ProcessStartTrace");
 		ManagementEventWatcher processStopEvent = new ManagementEventWatcher("SELECT * FROM Win32_ProcessStopTrace");
 
 		List<Process> procs = new List<Process>();
 
-		public Form1()
+		public MainWindow()
 		{
 			InitializeComponent();
 
@@ -33,7 +33,15 @@ namespace TestProcListener
 			//processStartEvent.EventArrived += new EventArrivedEventHandler(processStartEvent_EventArrived);
 			//processStopEvent.EventArrived += new EventArrivedEventHandler(processStopEvent_EventArrived);
 
-			richTextBox1.AppendText("There are currently " + procs.Count + " processes running.\nStarted listening...");
+			//richTextBox1.AppendText("There are currently " + procs.Count + " processes running.\nStarted listening...");
+
+			TreeNode tn0 = new TreeNode("Windows");
+			TreeNode tn1 = new TreeNode("Linux");
+			
+
+			treeView1.Nodes.Add(tn0);
+			treeView1.Nodes.Add(tn1);
+			treeView1.EndUpdate();
 
 			tryCheck();
 		}
@@ -110,13 +118,13 @@ namespace TestProcListener
 
 			if(listChanged)
 			{
-				richTextBox1.Text = "";
-				richTextBox1.Text = procs.Count + " procs being watched";
-				richTextBox1.Text += "\n" + currentProcs.Length + " procs running\n";
+				//richTextBox1.Text = "";
+				//richTextBox1.Text = procs.Count + " procs being watched";
+				//richTextBox1.Text += "\n" + currentProcs.Length + " procs running\n";
 
 				for(int i = 0; i < procs.Count; i++)
 				{
-					richTextBox1.Text += procs[i].ProcessName + "\n";
+					//richTextBox1.Text += procs[i].ProcessName + "\n";
 				}
 			}
 		}
@@ -126,7 +134,7 @@ namespace TestProcListener
 			string procName = e.NewEvent.Properties["ProcessName"].Value.ToString();
 			string procID = Convert.ToInt32(e.NewEvent.Properties["ProcessID"].Value).ToString();
 
-			richTextBox1.AppendText(procName + " " + procID + " has started");
+			//richTextBox1.AppendText(procName + " " + procID + " has started");
 			MessageBox.Show("hello there");
 		}
 
@@ -135,13 +143,22 @@ namespace TestProcListener
 			string procName = e.NewEvent.Properties["ProcessName"].Value.ToString();
 			string procID = Convert.ToInt32(e.NewEvent.Properties["ProcessID"].Value).ToString();
 
-			richTextBox1.AppendText(procName + " " + procID + " has ended");
+			//richTextBox1.AppendText(procName + " " + procID + " has ended");
 		}
 
 		private void timer1_Tick(object sender, EventArgs e)
 		{
 			timer1.Stop();
 			startWatching();
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			if(treeView1.SelectedNode != null)
+			{
+				//MessageBox.Show(treeView1.SelectedNode.Text);
+				ProcessWatcher.getInstance().addToWatchedProcesses(treeView1.SelectedNode.Text);
+			}
 		}
 	}
 }

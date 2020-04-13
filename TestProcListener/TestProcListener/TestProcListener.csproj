@@ -53,6 +53,13 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProcessTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProcessTab.Designer.cs">
+      <DependentUpon>ProcessTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessWatcher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
