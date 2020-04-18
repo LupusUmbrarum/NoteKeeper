@@ -35,15 +35,7 @@ namespace TestProcListener
 
 			//richTextBox1.AppendText("There are currently " + procs.Count + " processes running.\nStarted listening...");
 
-			TreeNode tn0 = new TreeNode("Windows");
-			TreeNode tn1 = new TreeNode("Linux");
-			
-
-			treeView1.Nodes.Add(tn0);
-			treeView1.Nodes.Add(tn1);
-			treeView1.EndUpdate();
-
-			tryCheck();
+			//tryCheck();
 		}
 
 		private void startWatching()
@@ -125,6 +117,21 @@ namespace TestProcListener
 				for(int i = 0; i < procs.Count; i++)
 				{
 					//richTextBox1.Text += procs[i].ProcessName + "\n";
+
+				}
+			}
+		}
+
+		void listProcesses()
+		{
+			Process[] procs = Process.GetProcesses();
+
+			for (int i = 0; i < procs.Length; i++)
+			{
+				if(procs[i].MainWindowTitle != "")
+				{
+					ListViewItem lvi = new ListViewItem(new string[] { procs[i].Id.ToString(), procs[i].ProcessName, procs[i].MainWindowTitle });
+					listView1.Items.Add(lvi);
 				}
 			}
 		}
@@ -154,11 +161,20 @@ namespace TestProcListener
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			if(treeView1.SelectedNode != null)
+			if(listView1.SelectedIndices.Count > 0)
 			{
-				//MessageBox.Show(treeView1.SelectedNode.Text);
-				ProcessWatcher.getInstance().addToWatchedProcesses(treeView1.SelectedNode.Text);
+				string res = "";
+				for(int i = 0; i < listView1.SelectedIndices.Count; i++)
+				{
+					res += listView1.Items[listView1.SelectedIndices[i]].SubItems[0].Text + " ";
+				}
+				MessageBox.Show(res);
 			}
+		}
+
+		private void refreshButton_Click(object sender, EventArgs e)
+		{
+			listProcesses();
 		}
 	}
 }

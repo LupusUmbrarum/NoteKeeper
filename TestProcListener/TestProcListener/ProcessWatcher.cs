@@ -13,8 +13,8 @@ namespace TestProcListener
 		// sample process note in settings:
 		// <ProcessWatcherNote ProcName="notepad.exe" UserProcName="Notepad">All of the notes go here</ProcessWatcherNote>
 
-		// list of watched for processes by process name, not user defined name
-		private List<string> watchedProcesses = new List<string>();
+		// list of watched for processes
+		private List<Proc> watchedProcs = new List<Proc>();
 
 		private ProcessWatcher()
 		{
@@ -31,11 +31,13 @@ namespace TestProcListener
 			return instance;
 		}
 
-		public bool addToWatchedProcesses(string newProcName)
+		public bool addToWatchedProcesses(string newProcName, string userProcName = "")
 		{
-			if(!watchedProcesses.Contains(newProcName))
+			if(!alreadyWatching(newProcName))
 			{
-				watchedProcesses.Add(newProcName);
+				Proc newProc = new Proc(newProcName, (userProcName == "" ? newProcName : userProcName));
+
+				watchedProcs.Add(newProc);
 				return true;
 			}
 
@@ -44,13 +46,62 @@ namespace TestProcListener
 
 		public bool removeFromWatchedProcesses(string oldProcName)
 		{
-			if(watchedProcesses.Contains(oldProcName))
+			if(alreadyWatching(oldProcName))
 			{
-				watchedProcesses.Remove(oldProcName);
+				stopWatching(oldProcName);
 				return true;
 			}
 
 			return false;
+		}
+
+		private bool alreadyWatching(string procName)
+		{
+			for(int i = 0; i < watchedProcs.Count; i++)
+			{
+				if(watchedProcs[i].procName == procName)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private void stopWatching(string procName)
+		{
+			for (int i = 0; i < watchedProcs.Count; i++)
+			{
+				if (watchedProcs[i].procName == procName)
+				{
+					watchedProcs.RemoveAt(i);
+					return;
+				}
+			}
+		}
+	}
+
+	public class Proc
+	{
+		/// <summary>
+		/// string containing the system name of the process
+		/// </summary>
+		public string procName;
+
+		/// <summary>
+		/// string containing the user-given name of the process
+		/// </summary>
+		public string userProcName;
+
+		public Proc() : this("", "")
+		{
+
+		}
+
+		public Proc(string procName, string userProcName)
+		{
+			this.procName = procName;
+			this.userProcName = userProcName;
 		}
 	}
 }

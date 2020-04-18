@@ -26,12 +26,12 @@ namespace TestProcListener.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string programsWatched {
+        public string notes {
             get {
-                return ((string)(this["programsWatched"]));
+                return ((string)(this["notes"]));
             }
             set {
-                this["programsWatched"] = value;
+                this["notes"] = value;
             }
         }
     }
