@@ -174,6 +174,7 @@ namespace TestProcListener
 
 		private void refreshButton_Click(object sender, EventArgs e)
 		{
+			listView1.Items.Clear();
 			listProcesses();
 		}
 	}
