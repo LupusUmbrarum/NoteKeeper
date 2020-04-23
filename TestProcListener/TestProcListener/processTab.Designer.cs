@@ -28,8 +28,16 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			components = new System.ComponentModel.Container();
+			this.SuspendLayout();
+			// 
+			// ProcessTab
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Name = "ProcessTab";
+			this.Size = new System.Drawing.Size(776, 535);
+			this.ResumeLayout(false);
+
 		}
 
 		#endregion

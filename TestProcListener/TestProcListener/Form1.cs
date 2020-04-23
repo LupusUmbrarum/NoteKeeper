@@ -30,6 +30,9 @@ namespace TestProcListener
 				procs.Add(currentProcs[i]);
 			}
 
+			procListView.Columns[1].Width = 300;
+			procListView.Columns[2].Width = 416;
+
 			//processStartEvent.EventArrived += new EventArrivedEventHandler(processStartEvent_EventArrived);
 			//processStopEvent.EventArrived += new EventArrivedEventHandler(processStopEvent_EventArrived);
 
@@ -131,7 +134,7 @@ namespace TestProcListener
 				if(procs[i].MainWindowTitle != "")
 				{
 					ListViewItem lvi = new ListViewItem(new string[] { procs[i].Id.ToString(), procs[i].ProcessName, procs[i].MainWindowTitle });
-					listView1.Items.Add(lvi);
+					procListView.Items.Add(lvi);
 				}
 			}
 		}
@@ -159,23 +162,35 @@ namespace TestProcListener
 			startWatching();
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void refreshButton_Click(object sender, EventArgs e)
 		{
-			if(listView1.SelectedIndices.Count > 0)
+			procListView.Items.Clear();
+			listProcesses();
+		}
+
+		private void addProcsButton_Click(object sender, EventArgs e)
+		{
+			if (procListView.SelectedIndices.Count > 0)
 			{
 				string res = "";
-				for(int i = 0; i < listView1.SelectedIndices.Count; i++)
+
+				for (int i = 0; i < procListView.SelectedIndices.Count; i++)
 				{
-					res += listView1.Items[listView1.SelectedIndices[i]].SubItems[0].Text + " ";
+					res += procListView.Items[procListView.SelectedIndices[i]].SubItems[0].Text + " ";
+					AddProcessForm newadf = new AddProcessForm(
+						procListView.Items[procListView.SelectedIndices[i]].SubItems[1].Text, 
+						procListView.Items[procListView.SelectedIndices[i]].SubItems[2].Text);
+					newadf.StartPosition = FormStartPosition.CenterParent;
+					newadf.ShowDialog(this);
 				}
-				MessageBox.Show(res);
+
+				//MessageBox.Show(res);
 			}
 		}
 
-		private void refreshButton_Click(object sender, EventArgs e)
+		private void procListView_ColumnClick(object sender, ColumnClickEventArgs e)
 		{
-			listView1.Items.Clear();
-			listProcesses();
+			
 		}
 	}
 }
