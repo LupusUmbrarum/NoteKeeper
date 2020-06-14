@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="notes" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">&lt;ProcessWatcherNote ProcName="notepad" UserProcName="Notepad"&gt;All of the notes go here including these&lt;/ProcessWatcherNote&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

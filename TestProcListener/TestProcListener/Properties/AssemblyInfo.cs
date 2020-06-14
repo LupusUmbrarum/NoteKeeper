@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TestProcListener")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("NoteKeeper")]
+[assembly: AssemblyDescription("Keeps track of active programs and user made notes for each.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("TestProcListener")]

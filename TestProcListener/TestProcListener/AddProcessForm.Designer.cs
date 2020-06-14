@@ -1,4 +1,4 @@
-﻿namespace TestProcListener
+﻿namespace NoteKeeper
 {
 	partial class AddProcessForm
 	{
@@ -90,7 +90,7 @@
 			this.prefProcNameTextBox.Name = "prefProcNameTextBox";
 			this.prefProcNameTextBox.Size = new System.Drawing.Size(174, 20);
 			this.prefProcNameTextBox.TabIndex = 0;
-			this.prefProcNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.prefProcNameTextBox_KeyUp);
+			this.prefProcNameTextBox.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.prefProcNameTextBox_PreviewKeyDown);
 			// 
 			// okButton
 			// 
@@ -125,7 +125,7 @@
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "AddProcessForm";
 			this.Text = "AddProcessForm";
 			this.ResumeLayout(false);
