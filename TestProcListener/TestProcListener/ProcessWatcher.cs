@@ -39,6 +39,8 @@ namespace NoteKeeper
 		{
 			string notes = Properties.Settings.Default.notes;
 
+			//MessageBox.Show(notes);
+
 			while (notes != "")
 			{
 				// returns the index of the space after
@@ -171,6 +173,18 @@ namespace NoteKeeper
 			{
 				watchedProcs[procName].font = font;
 			}
+		}
+
+		public Proc getProc(string procName)
+		{
+			Proc retProc;
+
+			if(watchedProcs.TryGetValue(procName, out retProc))
+			{
+				return retProc;
+			}
+
+			return null;
 		}
 
 		public void setUserProcName(string procName, string newUserProcName)

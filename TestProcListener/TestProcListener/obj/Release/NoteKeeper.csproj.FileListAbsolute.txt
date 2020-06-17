@@ -1,0 +1,13 @@
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\bin\Release\NoteKeeper.exe.config
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\bin\Release\NoteKeeper.exe
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\bin\Release\NoteKeeper.pdb
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\obj\Release\NoteKeeper.csprojAssemblyReference.cache
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\obj\Release\NoteKeeper.AddProcessForm.resources
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\obj\Release\NoteKeeper.ChangeUserProcNameDialog.resources
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\obj\Release\NoteKeeper.MainWindow.resources
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\obj\Release\NoteKeeper.ProcessTab.resources
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\obj\Release\NoteKeeper.Properties.Resources.resources
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\obj\Release\NoteKeeper.csproj.GenerateResource.cache
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\obj\Release\NoteKeeper.csproj.CoreCompileInputs.cache
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\obj\Release\NoteKeeper.exe
+A:\GitHub\NoteKeeper\TestProcListener\TestProcListener\obj\Release\NoteKeeper.pdb

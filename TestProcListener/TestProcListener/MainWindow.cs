@@ -22,9 +22,10 @@ namespace NoteKeeper
 		/// The current list of processes that the mainwindow is keeping track of
 		/// </summary>
 		List<string> currentProcessesListed = new List<string>();
+		static bool keepSearching = true;
 		static bool isListing = false;
 		Dispatcher dispatcher;
-		Task checker;
+		Thread checkerThread;
 
 		ManagementEventWatcher startWatch, stopWatch;
 
@@ -35,41 +36,23 @@ namespace NoteKeeper
 			procListView.Columns[1].Width = 245;
 			procListView.Columns[2].Width = 380;
 
-			listProcesses();
+			//listProcesses();
 
-			checkForNewProcesses();
+			//checkForNewProcesses();
 
 			ProcessWatcher.getInstance().addProcessListener(this);
-
-			ManagementEventWatcher startWatch = new ManagementEventWatcher(  new WqlEventQuery("SELECT * FROM Win32_ProcessStartTrace"));
-			startWatch.EventArrived += new EventArrivedEventHandler(startWatch_EventArrived);
-			//startWatch.Start();
-
-			ManagementEventWatcher stopWatch = new ManagementEventWatcher(new WqlEventQuery("SELECT * FROM Win32_ProcessStopTrace"));
-			stopWatch.EventArrived += new EventArrivedEventHandler(stopWatch_EventArrived);
-			//stopWatch.Start();
 
 			// set the dispatcher to this thread
 			dispatcher = Dispatcher.CurrentDispatcher;
 
-			// create an action to perform in a separate thread
-			Action<object> action = (object obj) =>
-			{
-				// the separate thread is 
-				checkProcs();
-			};
-
-			// create a task so that the action can run in a separate thread
-			checker = new Task(action, "alpha");
-
-			checker.Start();
+			timer1.Start();
 		}
 
 		// this method is meant to run in a separate thread forever
 		private void checkProcs()
 		{
 			// forever
-			while(true)
+			while(keepSearching)
 			{
 				// if the process list has changed
 				if(processListHasChanged())
@@ -84,25 +67,9 @@ namespace NoteKeeper
 			}
 		}
 
-		private static void stopWatch_EventArrived(object sender, EventArrivedEventArgs e)
-		{
-			string procName = e.NewEvent.Properties["ProcessName"].Value.ToString();
-			ProcessWatcher.getInstance().processStopped(procName);
-			//MessageBox.Show(procName);
-		}
-
-		private static void startWatch_EventArrived(object sender, EventArrivedEventArgs e)
-		{
-			string procName = e.NewEvent.Properties["ProcessName"].Value.ToString();
-			ProcessWatcher.getInstance().processStarted(procName);
-			//MessageBox.Show(procName);
-		}
-
 		private void checkForNewProcesses()
 		{
 			Process[] currentProcs = Process.GetProcesses();
-
-			bool listChanged = false;
 
 			for(int i = 0; i < currentProcs.Length; i++)
 			{
@@ -261,9 +228,16 @@ namespace NoteKeeper
 			}
 		}
 
+		// look, it's a workaround, ok?
 		private void timer1_Tick(object sender, EventArgs e)
 		{
 			timer1.Stop();
+			/*
+			Task.Factory.StartNew(() =>
+			{
+				checkerThread = Thread.CurrentThread;
+				checkProcs();
+			});*/
 			//startWatching();
 		}
 
@@ -288,6 +262,22 @@ namespace NoteKeeper
 				for (int i = 0; i < procListView.SelectedIndices.Count; i++)
 				{
 					string procName = procListView.Items[procListView.SelectedIndices[i]].SubItems[1].Text;
+
+					if(ProcessWatcher.getInstance().isWatching(procName))
+					{
+						if(!isTabOpen(procName))
+						{
+							Proc p = ProcessWatcher.getInstance().getProc(procName);
+
+							if(p != null)
+							{
+								addProcessTab(p.procName, p.userProcName, false);
+							}
+						}
+
+						continue;
+					}
+
 					string userProcName = procListView.Items[procListView.SelectedIndices[i]].SubItems[2].Text;
 
 					AddProcessForm newadf = new AddProcessForm(
@@ -340,10 +330,15 @@ namespace NoteKeeper
 			}
 			catch(Exception e)
 			{
-				//MessageBox.Show(e.Message + "\n" + e.StackTrace);
+				MessageBox.Show(e.Message + "\n" + e.StackTrace);
 			}
 		}
 
+		/// <summary>
+		/// If the list of open tabs (openTabs) contains the procName, return true;
+		/// </summary>
+		/// <param name="procName"></param>
+		/// <returns></returns>
 		private bool isTabOpen(string procName)
 		{
 			for(int i = 0; i < openTabs.Count; i++)
@@ -406,6 +401,8 @@ namespace NoteKeeper
 
 		public void changeProcessTabTitle(string procName, string newUserProcName)
 		{
+			keepSearching = false;
+
 			for (int i = 1; i < tabControl1.TabPages.Count; i++)
 			{
 				bool foundToChange = false;
@@ -437,6 +434,9 @@ namespace NoteKeeper
 
 		private void closeAll()
 		{
+			keepSearching = false;
+			checkerThread.Abort();
+
 			for (int i = 1; i < tabControl1.TabPages.Count; i++)
 			{
 				for (int j = 0; j < tabControl1.TabPages[i].Controls.Count; j++)
