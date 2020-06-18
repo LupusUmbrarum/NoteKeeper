@@ -57,7 +57,7 @@ namespace NoteKeeper
 
 			if(procName == "")
 			{
-				if (MessageBox.Show("You are watching the process \"" + userProcName + "\".\nWould you like to open the notes for it?",
+				if (MessageBox.Show("You are watching the process \"" + userProcName + "\".\nWould you like to go to the notes for it?",
 					"Process Added",
 					MessageBoxButtons.YesNo,
 					MessageBoxIcon.Question) == DialogResult.Yes)
@@ -71,7 +71,7 @@ namespace NoteKeeper
 			}
 			else
 			{
-				if (MessageBox.Show("You are watching the process \"" + procName + "\".\nWould you like to open the notes for it?",
+				if (MessageBox.Show("You are watching the process \"" + procName + "\".\nWould you like to go to the notes for it?",
 					"Process Added",
 					MessageBoxButtons.YesNo,
 					MessageBoxIcon.Question) == DialogResult.Yes)

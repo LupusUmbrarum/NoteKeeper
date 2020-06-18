@@ -33,6 +33,7 @@
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.mainTabPage = new System.Windows.Forms.TabPage();
+			this.clearNotesButton = new System.Windows.Forms.Button();
 			this.addProcsButton = new System.Windows.Forms.Button();
 			this.procListView = new System.Windows.Forms.ListView();
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -40,8 +41,6 @@
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.refreshButton = new System.Windows.Forms.Button();
-			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-			this.clearNotesButton = new System.Windows.Forms.Button();
 			this.tabControl1.SuspendLayout();
 			this.mainTabPage.SuspendLayout();
 			this.SuspendLayout();
@@ -73,6 +72,17 @@
 			this.mainTabPage.TabIndex = 0;
 			this.mainTabPage.Text = "Main Menu";
 			this.mainTabPage.UseVisualStyleBackColor = true;
+			// 
+			// clearNotesButton
+			// 
+			this.clearNotesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.clearNotesButton.Location = new System.Drawing.Point(698, 6);
+			this.clearNotesButton.Name = "clearNotesButton";
+			this.clearNotesButton.Size = new System.Drawing.Size(75, 23);
+			this.clearNotesButton.TabIndex = 6;
+			this.clearNotesButton.Text = "Clear Notes";
+			this.clearNotesButton.UseVisualStyleBackColor = true;
+			this.clearNotesButton.Click += new System.EventHandler(this.clearNotesButton_Click);
 			// 
 			// addProcsButton
 			// 
@@ -136,23 +146,6 @@
 			this.refreshButton.UseVisualStyleBackColor = true;
 			this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
 			// 
-			// notifyIcon1
-			// 
-			this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-			this.notifyIcon1.Text = "notifyIcon1";
-			this.notifyIcon1.Visible = true;
-			// 
-			// clearNotesButton
-			// 
-			this.clearNotesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.clearNotesButton.Location = new System.Drawing.Point(698, 6);
-			this.clearNotesButton.Name = "clearNotesButton";
-			this.clearNotesButton.Size = new System.Drawing.Size(75, 23);
-			this.clearNotesButton.TabIndex = 6;
-			this.clearNotesButton.Text = "Clear Notes";
-			this.clearNotesButton.UseVisualStyleBackColor = true;
-			this.clearNotesButton.Click += new System.EventHandler(this.clearNotesButton_Click);
-			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -162,7 +155,7 @@
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "MainWindow";
-			this.Text = "NoteKeeper - v1.0.0";
+			this.Text = "NoteKeeper - v1.0.1";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
 			this.tabControl1.ResumeLayout(false);
 			this.mainTabPage.ResumeLayout(false);
@@ -181,7 +174,6 @@
 		private System.Windows.Forms.ColumnHeader columnHeader3;
 		private System.Windows.Forms.Button addProcsButton;
 		private System.Windows.Forms.ColumnHeader columnHeader4;
-		private System.Windows.Forms.NotifyIcon notifyIcon1;
 		private System.Windows.Forms.Button clearNotesButton;
 	}
 }

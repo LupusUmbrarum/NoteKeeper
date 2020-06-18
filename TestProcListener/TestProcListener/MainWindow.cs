@@ -232,13 +232,12 @@ namespace NoteKeeper
 		private void timer1_Tick(object sender, EventArgs e)
 		{
 			timer1.Stop();
-			/*
+			
 			Task.Factory.StartNew(() =>
 			{
 				checkerThread = Thread.CurrentThread;
 				checkProcs();
-			});*/
-			//startWatching();
+			});
 		}
 
 		private void refreshButton_Click(object sender, EventArgs e)
